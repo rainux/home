@@ -1,0 +1,16 @@
+alias diff='colordiff'
+alias grep='grep --color'
+alias less='less -r'
+alias ls='ls --color -hF --show-control-chars'
+alias make='colormake'
+
+export CDPATH=~/devel
+export EDITOR=vim
+export PATH=$HOME/bin:$PATH
+
+if [[ $TERM == linux ]]
+then
+    export LANG=C
+fi
+
+# vim: set ft=sh:

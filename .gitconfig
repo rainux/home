@@ -1,0 +1,28 @@
+[core]
+	;  autocrlf = input
+	safecrlf = warn
+	;  gitproxy = gitproxy
+[color]
+	ui = auto
+[user]
+	name = Rainux Luo
+	email = rainux@gmail.com
+[merge]
+	summary = true
+[alias]
+	b      = branch
+	co     = checkout
+	ci     = commit
+	ch     = cherry -v
+	d      = diff -b
+	dc     = diff -b --cached
+	ds     = diff -b --stat
+	l      = log -p
+	s      = status
+	st     = stash
+	# summary of what you're going to push
+	ps     = log --pretty=oneline origin..master
+	# like "git log", but include the diffs
+	w      = whatchanged -p
+	edit-unmerged = "!f() { git ls-files -u | sort -u; }; gvim `f`"
+	add-unmerged  = "!f() { git ls-files -u | sort -u; }; git add `f`"

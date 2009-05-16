@@ -1,0 +1,9 @@
+set guioptions+=mT
+set visualbell
+map <C-b> <C-v><C-b>
+map <C-c> <C-v><C-c>
+imap <C-c> <C-v><C-c>
+
+autocmd LocationChange .* js modes.passAllKeys = /(www|mail)\.google\.com/.test(buffer.URL)
+autocmd LocationChange .* :set editor=gvim\ -f
+autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
