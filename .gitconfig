@@ -9,6 +9,8 @@
 	email = rainux@gmail.com
 [merge]
 	summary = true
+[push]
+	default = tracking
 [alias]
 	b      = branch
 	co     = checkout
