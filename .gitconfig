@@ -6,6 +6,8 @@
 	autosetuprebase = always
 [color]
 	ui = auto
+[diff]
+    renames = copies
 [user]
 	name = Rainux Luo
 	email = rainux@gmail.com
@@ -15,6 +17,8 @@
 [push]
 	default = current
 [alias]
+    a       = add
+    au      = add -u
 	b      = branch
 	co     = checkout
 	ci     = commit
@@ -27,6 +31,12 @@
 	s      = status
 	show    = show -b
 	st     = stash
+    sts     = stash show
+    sts1    = stash show stash@{1} -p
+    sts2    = stash show stash@{2} -p
+    sts3    = stash show stash@{3} -p
+    sts4    = stash show stash@{4} -p
+    sts5    = stash show stash@{5} -p
 	# summary of what you're going to push
 	ps     = log --pretty=oneline origin..master
 	# like "git log", but include the diffs

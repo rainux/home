@@ -13,8 +13,7 @@ limit coredumpsize 0
 
 # Vi 风格键绑定
 bindkey -v
-# 设置DEL键为向后删除
-bindkey "\e[3~" delete-char
+bindkey '^R' history-incremental-search-backward
 
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
@@ -44,7 +43,7 @@ zstyle ':completion:*' expand 'yes'
 zstyle ':completion:*' squeeze-shlashes 'yes'
 zstyle ':completion::complete:*' '\\'
 
-zstyle ':completion:*:*:*:default' menu yes select
+zstyle ':completion:*:*:*:default' menu no select
 zstyle ':completion:*:*:default' force-list always
 
 # 自动补全时候选菜单中的选项使用 dircolors 设定的彩色显示
@@ -60,7 +59,7 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 compdef pkill=kill
 compdef pkill=killall
-zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*' menu no select
 zstyle ':completion:*:processes' command 'ps -au$USER'
 
 # Group matches and Describe
@@ -209,7 +208,11 @@ setprompt () {
     # Finally, the prompt.
 
     PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}%{[36m%}%n%{[35m%}@%{[34m%}%M %{[32m%}%~
-%{[31m%}%#%{[m%} '
+%{[31m%}%#%{[m%} YUKI.N> '
 }
 
 setprompt
+
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
+# vim: set ft=zsh:

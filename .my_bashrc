@@ -3,14 +3,49 @@ alias grep='grep --color'
 alias less='less -r'
 alias ls='ls --color -hF --show-control-chars'
 alias make='colormake'
+alias open='gnome-open'
+alias autospec_cold='rake db:migrate; rake db:test:prepare; AUTOFEATURE=true autospec'
+alias autospecf='AUTOFEATURE=true autospec'
+alias rgu='rvm gemset use'
+alias rgl='rvm gemset list'
+alias rgc='rvm gemset create'
 
-export CDPATH=~/devel
-export EDITOR=vim
-export PATH=$HOME/bin:$PATH
+# Pacman alias examples
+alias pacupg='sudo pacman-color -Syu'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
+alias pacin='sudo pacman-color -S'           # Install specific package(s) from the repositories
+alias pacins='sudo pacman-color -Up'         # Install specific package not from the repositories but from a file 
+alias pacre='sudo pacman-color -R'           # Remove the specified package(s), retaining its configuration(s) and required dependencies
+alias pacrem='sudo pacman-color -Rns'        # Remove the specified package(s), its configuration(s) and unneeded dependencies
+alias pacrep='pacman-color -Si'              # Display information about a given package in the repositories
+alias pacreps='pacman-color -Ss'             # Search for package(s) in the repositories
+alias pacloc='pacman-color -Qi'              # Display information about a given package in the local database
+alias paclocs='pacman-color -Qs'             # Search for package(s) in the local database
+# Additional pacman alias examples
+alias pacupd='sudo pacman-color -Sy && sudo abs'     # Update and refresh the local package and ABS databases against repositories
+alias pacinsd='sudo pacman-color -S --asdeps'        # Install given package(s) as dependencies of another package
+alias pacmir='sudo pacman-color -Syy'                # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+
+alias yaoupg='sudo yaourt -Syu --aur --devel'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
+alias yaoin='sudo yaourt -S'           # Install specific package(s) from the repositories
+alias yaoins='sudo yaourt -Up'         # Install specific package not from the repositories but from a file 
+alias yaore='sudo yaourt -R'           # Remove the specified package(s), retaining its configuration(s) and required dependencies
+alias yaorem='sudo yaourt -Rns'        # Remove the specified package(s), its configuration(s) and unneeded dependencies
+alias yaorep='yaourt -Si'              # Display information about a given package in the repositories
+alias yaoreps='yaourt -Ss'             # Search for package(s) in the repositories
+alias yaoloc='yaourt -Qi'              # Display information about a given package in the local database
+alias yaolocs='yaourt -Qs'             # Search for package(s) in the local database
+# Additional pacman alias examples
+alias yaoupd='sudo yaourt -Sy && sudo abs'     # Update and refresh the local package and ABS databases against repositories
+alias yaoinsd='sudo yaourt -S --asdeps'        # Install given package(s) as dependencies of another yaokage
+alias yaomir='sudo yaourt -Syy'                # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+
+export PATH="$HOME/bin:$PATH"
+export CDPATH='.:~/devel'
+export EDITOR='vim'
 
 if [[ $TERM == linux ]]
 then
-    export LANG=C
+    export LANG='C'
 fi
 
 # vim: set ft=sh:
