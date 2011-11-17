@@ -3,3 +3,5 @@ clear Lock
 ! Caps Lock map to Control_L
 keycode 66  = Control_L
 add Control = Control_L
+keycode 105 = Control_R
+add Control = Control_R

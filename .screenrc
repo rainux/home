@@ -83,6 +83,9 @@ termcapinfo   xterm 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
 # - uses background color for delete operations
 termcapinfo xterm* be
 
+# Use 256 color
+term 'screen-256color'
+
 ################
 #
 # wyse terminals
@@ -142,14 +145,14 @@ bind ^] paste [.]
 # default windows
 #
 
-screen
-screen
-screen
-screen
-screen
-screen
-screen
-screen
+screen 0
+screen 1
+screen 2
+screen 3
+screen 4
+screen 5
+screen 6
+screen 7
 screen 8 sudo su
 screen 9 sudo su
 select 1

@@ -4,8 +4,9 @@ map <C-b> <C-v><C-b>
 map <C-c> <C-v><C-c>
 imap <C-c> <C-v><C-c>
 
-autocmd LocationChange .* js modes.passAllKeys = /(www|mail)\.google\.com/.test(buffer.URL)
 autocmd LocationChange .* :set editor=gvim\ -f
-autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
+autocmd LocationChange /mail\.google\.com/ :set editor="gvim -f -c 'set ft=mail'"
 
-js styles.removeSheet(true, 'tab-binding')
+autocmd LocationChange .* :js modes.passAllKeys = false
+autocmd LocationChange /mail\.google\.com/ :js modes.passAllKeys = true
+autocmd LocationChange /www\.google\.com\/reader\/view/ :js modes.passAllKeys = true

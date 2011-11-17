@@ -1,15 +1,24 @@
+alias acka='ack -a'
+alias be='bundle exec'
 alias diff='colordiff'
+alias g='git'
+alias gf='git-flow'
+alias gvi='gvim --noplugin'
 alias grep='grep --color'
 alias less='less -r'
 alias ls='ls --color -hF --show-control-chars'
 alias make='colormake'
+alias o='gnome-open'
 alias open='gnome-open'
-alias autospec_cold='rake db:migrate; rake db:test:prepare; AUTOFEATURE=true autospec'
-alias autospecf='AUTOFEATURE=true autospec'
-alias rg='rvm gemset'
-alias rgu='rvm gemset use'
-alias rgl='rvm gemset list'
+alias qgit='qgit --all &'
 alias rgc='rvm gemset create'
+alias rgl='rvm gemset list'
+alias rgu='rvm gemset use'
+alias r='rails'
+alias sudo='sudo -E'
+alias vi='vim --noplugin'
+alias wget='wget --no-check-certificate'
+alias psg='ps aux | grep'
 
 alias pacupg='sudo pacman-color -Syu'
 alias pacin='sudo pacman-color -S'
@@ -36,10 +45,18 @@ alias yaolocs='yaourt -Qs'
 alias yaoupd='yaourt -Sy && sudo abs'
 alias yaoinsd='yaourt -S --asdeps'
 alias yaomir='yaourt -Syy'
+alias yaoget='yaourt -G'
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:/usr/lib/colorgcc/bin:$PATH"
+# Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
 export EDITOR='vim'
+export RBXOPT='-Xrbc.db=/home/rainux/.rbx'
+export JRUBY_OPTS='--ng --1.9'
+if [[ $TERM == xterm ]]
+then
+    export TERM='xterm-256color'
+fi
 
 if [[ $TERM == linux ]]
 then

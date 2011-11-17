@@ -1,64 +1,52 @@
 require 'rubygems'
-require 'pp'
-require 'irb/completion'
-require 'irb/ext/save-history'
+require 'irbtools/configure'
 
-$KCODE = 'u' unless defined?(Encoding)
-
-IRB.conf[:SAVE_HISTORY] = 100
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
-IRB.conf[:PROMPT_MODE]  = :SIMPLE
-
-# Use awesome_print as default formatter
-begin
-  require 'ap'
-
-  if defined?(Logger)
-    Logger.class_eval do
-      alias_method :original_debug, :debug
-      def debug(message)
-        original_debug(message.ai)
-      end
-    end
-  end
-
-  IRB::Irb.class_eval do
-    def output_value
-      ap @context.last_value
-    end
-  end
-rescue LoadError
+Irbtools.replace_library_callback :fancy_irb do
+  FancyIrb.start :colorize => {:input_prompt => nil, :input => nil}
 end
 
-if defined?(Rails)
-  rails_root = File.basename(Dir.pwd)
-  IRB.conf[:PROMPT] ||= {}
-  IRB.conf[:PROMPT][:RAILS] = {
-    :PROMPT_I => "#{rails_root}> ",
-    :PROMPT_S => "#{rails_root}* ",
-    :PROMPT_C => "#{rails_root}? ",
-    :RETURN   => "=> %s\n"
-  }
-  IRB.conf[:PROMPT_MODE] = :RAILS
-
-  # Called after the irb session is initialized and Rails has
-  # been loaded (props: Mike Clark).
-  IRB.conf[:IRB_RC] = Proc.new do
-
-    if defined?(ActiveRecord)
-      ActiveRecord::Base.logger = Logger.new(STDOUT)
-      ActiveRecord::Base.instance_eval { alias :[] :find }
-    end
-
-    if defined?(Mongoid)
-      Mongoid.logger = Logger.new(STDOUT)
-    end
+# irbtools-more depends on drx which may not build on some rubies,
+# in this case we add bond manually.
+begin
+  require 'irbtools/more'
+rescue LoadError
+  Irbtools.add_library :bond, :thread => 'bond' do
+    Bond.start
   end
 end
 
-begin
-  require 'drx'
-rescue LoadError
+Irbtools.start
+
+rails_root = File.basename(Dir.pwd)
+IRB.conf[:PROMPT] ||= {}
+IRB.conf[:PROMPT][:RAILS] = {
+  :PROMPT_I => "#{rails_root}> ",
+  :PROMPT_S => "#{rails_root}* ",
+  :PROMPT_C => "#{rails_root}? ",
+  :RETURN   => "=> %s\n"
+}
+IRB.conf[:PROMPT_MODE] = :RAILS
+
+# Called after the irb session is initialized and Rails has
+# been loaded (props: Mike Clark).
+IRB.conf[:IRB_RC] = Proc.new do
+
+  if defined?(ActiveRecord)
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.instance_eval { alias :[] :find }
+  end
+
+  if defined?(Mongoid)
+    Mongoid.logger = Logger.new(STDOUT)
+  end
+
+  if defined?(MongoMapper)
+    MongoMapper.connection.instance_variable_set(:@logger, Logger.new(STDOUT))
+  end
+
+  if defined?(Rails)
+    Rails.logger = Logger.new(STDOUT)
+  end
 end
 
 # vim: set ft=ruby:
