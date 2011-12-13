@@ -47,11 +47,11 @@ alias yaoinsd='yaourt -S --asdeps'
 alias yaomir='yaourt -Syy'
 alias yaoget='yaourt -G'
 
-export PATH="$HOME/bin:/usr/lib/colorgcc/bin:$PATH"
+export PATH="$HOME/bin:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:$PATH"
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
 export EDITOR='vim'
-export RBXOPT='-Xrbc.db=/home/rainux/.rbx'
+export RBXOPT="-Xrbc.db=$HOME/.rbx"
 export JRUBY_OPTS='--ng --1.9'
 if [[ $TERM == xterm ]]
 then
