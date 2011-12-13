@@ -18,9 +18,9 @@ link_file() {
     file="$1"
     dirname=$(dirname "$file")
     echo $file
-    if [[ ! -e $HOME/$dirname ]]
+    if [[ ! -d $HOME/$dirname ]]
     then
-        mkdir -p "$dirname"
+        mkdir -p "$HOME/$dirname"
     fi
     ln -s "$PWD/$file" "$HOME/$file"
 }
@@ -43,6 +43,8 @@ do
     if cmp -s "$HOME/$file" "$file"
     then
         echo -e "${GREEN}Identical${RESET} ~/$file"
+        rm -rf "$HOME/$file"
+        link_file "$file"
     else
         echo -n "Overwrite ~/$file? [yn] "
         while read -r -n 1 -s answer
