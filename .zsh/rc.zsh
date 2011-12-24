@@ -18,10 +18,6 @@ bindkey '^R' history-incremental-search-backward
 # 以下字符视为单词的一部分
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
-# Fuck OMZ settings
-# unsetopt correct_all
-# unsetopt share_history
-
 # 自动补全功能
 setopt AUTO_LIST
 setopt AUTO_MENU
