@@ -8,6 +8,8 @@ export HISTFILE=~/.zsh_history
 # append command to history file once executed
 setopt INC_APPEND_HISTORY
 
+setopt auto_pushd
+
 # Disable core dumps
 limit coredumpsize 0
 
