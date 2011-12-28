@@ -1,7 +1,4 @@
 set visualbell
-map <C-b> <C-v><C-b>
-map <C-c> <C-v><C-c>
-imap <C-c> <C-v><C-c>
 
 autocmd LocationChange .* :set editor=gvim\ -f
 autocmd LocationChange /mail\.google\.com/ :set editor="gvim -f -c 'set ft=mail'"
