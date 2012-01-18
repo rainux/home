@@ -6,4 +6,4 @@ Installation
     cd home
     ./install.sh
 
-The installer will prompt file overwriten and backup your own files.
+The installer will check file identical and ask for overwrite, if you choose overwrite, the original file will be backup as `*.orginal`.
