@@ -52,6 +52,7 @@ alias yaoget='yaourt -G'
 export PATH="$HOME/bin:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:$PATH"
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
+export LC_CTYPE='zh_CN.UTF-8'
 export EDITOR='vim'
 export RBXOPT="-Xrbc.db=$HOME/.rbx"
 export JRUBY_OPTS='--ng --1.9'
