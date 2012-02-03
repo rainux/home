@@ -10,6 +10,7 @@ RESET='\e[0m'
 get_files() {
     find . ! '(' -path ./.git -prune ')' \
         ! -path ./install.sh \
+        ! -path ./README.markdown \
         -type f \
         -print0
 }
