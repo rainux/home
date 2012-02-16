@@ -4,7 +4,7 @@ HISTSIZE=100000
 # number of lines saved in the history after logout
 SAVEHIST=100000
 # location of history
-export HISTFILE=~/.zsh_history
+export HISTFILE=~/.zsh/history
 # append command to history file once executed
 setopt INC_APPEND_HISTORY
 
@@ -30,7 +30,7 @@ compinit
 
 # Completion caching
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path .zcache
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
 # zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # Completion Options
