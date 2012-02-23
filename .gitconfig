@@ -49,6 +49,8 @@
     rth     = reset --hard
     s       = status
     show    = show -b
+    showw   = show -b --word-diff=color
+    sm      = submodule
     st      = stash
     stl     = stash list
     stp     = stash pop
