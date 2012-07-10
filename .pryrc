@@ -34,7 +34,7 @@ rescue LoadError
 end
 
 
-Pry.hooks[:before_session] = proc do
+Pry.config.hooks.add_hook(:before_session, :greetings) do
 
   puts "Loading #{Rails.env} environment (Rails #{Rails.version})" if defined?(Rails)
   puts "You are using #{RUBY_DESCRIPTION}. Have fun ;)"
