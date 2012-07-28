@@ -21,6 +21,7 @@ alias vi='vim --noplugin'
 alias wget='wget --no-check-certificate'
 alias psg='ps aux | grep'
 alias dstart='sudo rc.d start'
+alias drestart='sudo rc.d restart'
 alias dstop='sudo rc.d stop'
 
 alias pacupg='sudo pacman-color -Syu'
