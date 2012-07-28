@@ -72,3 +72,6 @@
     edit-unmerged   = "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; gvim `f`"
     add-unmerged    = "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; git add `f`"
     today = !git log --since=\"12 hours ago\" --author=\"`git config --get user.name`\" --reverse --pretty=format:%s
+    f       = flow feature
+    frb     = flow feature rebase
+    fco     = flow feature checkout
