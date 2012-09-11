@@ -1,20 +1,3 @@
-rails = File.join Dir.getwd, 'config', 'environment.rb'
-
-if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
-  require rails
-
-  if Rails.version.first == '2'
-    require 'console_app'
-    require 'console_with_helpers'
-  elsif Rails.version.first == '3'
-    require 'rails/console/app'
-    require 'rails/console/helpers'
-  else
-    warn '[WARN] Can not load Rails console commands (Not on Rails 2 or Rails 3?)'
-  end
-end
-
-
 begin
   require 'awesome_print'
   Pry.config.print = proc { |output, value| output.puts value.ai }
@@ -36,7 +19,6 @@ end
 
 Pry.config.hooks.add_hook(:before_session, :greetings) do
 
-  puts "Loading #{Rails.env} environment (Rails #{Rails.version})" if defined?(Rails)
   puts "You are using #{RUBY_DESCRIPTION}. Have fun ;)"
 
   if defined?(ActiveRecord)
@@ -55,5 +37,12 @@ Pry.config.hooks.add_hook(:before_session, :greetings) do
     Rails.logger = Logger.new(STDOUT)
   end
 end
+
+Pry.commands.alias_command 'c', 'continue'
+Pry.commands.alias_command 's', 'step'
+Pry.commands.alias_command 'n', 'next'
+Pry.commands.alias_command 'u', 'up'
+Pry.commands.alias_command 'd', 'down'
+Pry.commands.alias_command 'em', 'edit-method'
 
 # vim: set ft=ruby:
