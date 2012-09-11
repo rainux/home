@@ -20,9 +20,10 @@ alias sudo='sudo -E'
 alias vi='vim --noplugin'
 alias wget='wget --no-check-certificate'
 alias psg='ps aux | grep'
-alias dstart='sudo rc.d start'
-alias drestart='sudo rc.d restart'
-alias dstop='sudo rc.d stop'
+alias dstart='sudo systemctl start'
+alias drestart='sudo systemctl restart'
+alias dstop='sudo systemctl stop'
+alias wicd='wicd-curses'
 
 alias pacupg='sudo pacman-color -Syu'
 alias pacin='sudo pacman-color -S'
@@ -36,6 +37,8 @@ alias paclocs='pacman-color -Qs'
 alias pacupd='sudo pacman-color -Sy && sudo abs'
 alias pacinsd='sudo pacman-color -S --asdeps'
 alias pacmir='sudo pacman-color -Syy'
+alias pacfile='pacman-color -Qo'
+alias pacfiles='pacman-color -Qlq'
 
 alias yaoupg='yaourt -Syu --aur --devel'
 alias yaoin='yaourt -S'
@@ -51,7 +54,8 @@ alias yaoinsd='yaourt -S --asdeps'
 alias yaomir='yaourt -Syy'
 alias yaoget='yaourt -G'
 
-export PATH="$HOME/bin:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:$PATH:$HOME/.rvm/bin"
+export GOPATH="$HOME/go"
+export PATH="$HOME/bin:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:$PATH:$HOME/.rvm/bin:$GOPATH/bin"
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
 export LC_CTYPE='zh_CN.UTF-8'
