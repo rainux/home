@@ -1,6 +1,7 @@
 [core]
     ; autocrlf = input
     safecrlf = warn
+    excludesfile = ~/.gitignore
 [github]
     user = rainux
 [branch]
@@ -13,8 +14,8 @@
 [difftool]
     prompt = false
 [user]
-    name    = Rainux Luo
-    email   = rainux@gmail.com
+    name = Rainux Luo
+    email = rainux@gmail.com
 [merge]
     summary = true
     tool    = gvimdiff
