@@ -8,7 +8,7 @@ YELLOW='\e[0;33m'
 RESET='\e[0m'
 
 get_files() {
-    find . ! '(' -path ./.git -prune ')' \
+    find . ! '(' -path */.git -prune ')' \
         ! -path ./install.sh \
         ! -path ./README.markdown \
         -type f \
@@ -32,6 +32,8 @@ link_file() {
         ln -s "$PWD/$file" "$HOME/$file"
     fi
 }
+
+git submodule update --init
 
 while IFS= read -r -d '' file
 do
