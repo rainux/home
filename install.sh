@@ -23,7 +23,14 @@ link_file() {
     then
         mkdir -p "$HOME/$dirname"
     fi
-    ln -s "$PWD/$file" "$HOME/$file"
+
+    # Use hardlink in Cygwin since NTFS does not support symbolic link for file
+    if [[ `uname -o` == Cygwin ]]
+    then
+        ln "$PWD/$file" "$HOME/$file"
+    else
+        ln -s "$PWD/$file" "$HOME/$file"
+    fi
 }
 
 while IFS= read -r -d '' file
