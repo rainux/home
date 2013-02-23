@@ -2,6 +2,6 @@ map h 4h
 map j 4j
 map k 4k
 map l 4l
-set disablesites=mail.google.com, www.google.com/reader, groups.google.com, twitter.com
+set disablesites=mail.google.com, www.google.com/reader, groups.google.com, docs.google.com, twitter.com
 set nextpattern+=^NextPage|Next →|››|后页>$
 set previouspattern+=^PrevPage|← Previous|‹‹|<前页$
