@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 files=()
 
@@ -8,8 +8,8 @@ YELLOW='\e[0;33m'
 RESET='\e[0m'
 
 get_files() {
-    find . ! '(' -path */.git -prune ')' \
-        ! -path ./install.sh \
+    find . ! '(' -path '*/.git' -prune ')' \
+        ! -path ./install.zsh \
         ! -path ./README.markdown \
         -type f \
         -print0
@@ -25,7 +25,7 @@ link_file() {
     fi
 
     # Use hardlink in Cygwin since NTFS does not support symbolic link for file
-    if [[ `uname -o` == Cygwin ]]
+    if [[ $OSTYPE =~ cygwin ]]
     then
         ln "$PWD/$file" "$HOME/$file"
     else
@@ -33,6 +33,7 @@ link_file() {
     fi
 }
 
+cd `dirname $0`
 git submodule update --init
 
 while IFS= read -r -d '' file
@@ -57,7 +58,7 @@ do
         link_file "$file"
     else
         echo -n "Overwrite ~/$file? [yn] "
-        while read -r -n 1 -s answer
+        while read -s -r answer
         do
             if [[ $answer == [YyNn] ]]
             then
@@ -78,3 +79,5 @@ do
         fi
     fi
 done
+
+# vim: set ft=sh:
