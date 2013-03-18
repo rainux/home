@@ -1,3 +1,12 @@
+if [[ $OSTYPE =~ darwin ]]; then
+    alias gvim='open -a MacVim'
+    alias ls='ls -GFh'
+    alias o='open'
+else
+    alias ls='ls --color -hF --show-control-chars'
+    alias o='gnome-open'
+    alias open='gnome-open'
+fi
 alias acka='ack -a'
 alias be='bundle exec'
 alias diff='colordiff'
@@ -6,10 +15,7 @@ alias gf='git-flow'
 alias gvi='gvim --noplugin'
 alias grep='grep --color'
 alias less='less -r'
-alias ls='ls --color -hF --show-control-chars'
 alias make='colormake'
-alias o='gnome-open'
-alias open='gnome-open'
 alias qgit='qgit --all &'
 alias rgc='rvm gemset create'
 alias rgl='rvm gemset list'
@@ -54,20 +60,32 @@ alias yaoinsd='yaourt -S --asdeps'
 alias yaomir='yaourt -Syy'
 alias yaoget='yaourt -G'
 
+export ANDROID_HOME="$HOME/android-sdk"
 export GOPATH="$HOME/go"
-export PATH="$HOME/bin:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:$PATH:$HOME/.rvm/bin:$GOPATH/bin"
+export PATH="$HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$GOPATH/bin"
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
-export LC_CTYPE='zh_CN.UTF-8'
+if [[ $OSTYPE =~ darwin ]]; then
+    export LANG='en_US.UTF-8'
+else
+    export LC_CTYPE='zh_CN.UTF-8'
+fi
 export EDITOR='vim'
 export RBXOPT="-Xrbc.db=$HOME/.rbx"
-export JRUBY_OPTS='--ng --1.9'
+export JRUBY_OPTS='--ng'
+if [[ $OSTYPE =~ darwin ]]; then
+    # RubyMotion compiling jobs
+    export jobs=8
+    # RubyMotion deployment target
+    export target='5.0'
+fi
 
 export RUBY_HEAP_MIN_SLOTS=1000000
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
+export RUBY_GC_MALLOC_LIMIT=60000000
+export RUBY_FREE_MIN=200000
 
 if [[ $TERM == xterm ]]
 then
@@ -78,5 +96,19 @@ if [[ $TERM == linux ]]
 then
     export LANG='C'
 fi
+
+http_proxy() {
+    if [[ $1 == on ]]
+    then
+        echo http_proxy turned on
+        export http_proxy=http://localhost:8123
+    elif [[ $1 == off ]]
+    then
+        echo http_proxy turned off
+        unset http_proxy
+    else
+        echo 'Usage: http_proxy [on|off]'
+    fi
+}
 
 # vim: set ft=sh:

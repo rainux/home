@@ -49,8 +49,10 @@ zstyle ':completion:*:*:*:default' menu no select
 zstyle ':completion:*:*:default' force-list always
 
 # 自动补全时候选菜单中的选项使用 dircolors 设定的彩色显示
-eval $(dircolors -b)
-export ZLSCOLORS="${LS_COLORS}"
+if [[ ! ($OSTYPE =~ darwin) ]]; then
+    eval $(dircolors -b)
+    export ZLSCOLORS="${LS_COLORS}"
+fi
 zmodload zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
@@ -91,4 +93,4 @@ source ~/.zsh/theme.zsh
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
