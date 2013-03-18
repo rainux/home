@@ -10,9 +10,6 @@ setopt INC_APPEND_HISTORY
 
 setopt auto_pushd
 
-# Disable core dumps
-limit coredumpsize 0
-
 # Vi 风格键绑定
 bindkey -v
 bindkey '^R' history-incremental-search-backward
