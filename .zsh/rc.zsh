@@ -46,7 +46,7 @@ zstyle ':completion:*:*:*:default' menu no select
 zstyle ':completion:*:*:default' force-list always
 
 # 自动补全时候选菜单中的选项使用 dircolors 设定的彩色显示
-if [[ ! ($OSTYPE =~ darwin) ]]; then
+if [[ ! ($OSTYPE == darwin*) ]]; then
     eval $(dircolors -b)
     export ZLSCOLORS="${LS_COLORS}"
 fi

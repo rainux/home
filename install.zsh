@@ -25,7 +25,7 @@ link_file() {
     fi
 
     # Use hardlink in Cygwin since NTFS does not support symbolic link for file
-    if [[ $OSTYPE =~ cygwin ]]
+    if [[ $OSTYPE == cygwin ]]
     then
         ln "$PWD/$file" "$HOME/$file"
     else

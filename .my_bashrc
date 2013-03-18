@@ -1,4 +1,4 @@
-if [[ $OSTYPE =~ darwin ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     alias gvim='open -a MacVim'
     alias ls='ls -GFh'
     alias o='open'
@@ -65,7 +65,7 @@ export GOPATH="$HOME/go"
 export PATH="$HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$GOPATH/bin"
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
-if [[ $OSTYPE =~ darwin ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     export LANG='en_US.UTF-8'
 else
     export LC_CTYPE='zh_CN.UTF-8'
@@ -73,7 +73,7 @@ fi
 export EDITOR='vim'
 export RBXOPT="-Xrbc.db=$HOME/.rbx"
 export JRUBY_OPTS='--ng'
-if [[ $OSTYPE =~ darwin ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     # RubyMotion compiling jobs
     export jobs=8
     # RubyMotion deployment target
