@@ -1,81 +1,81 @@
 [core]
-    ; autocrlf = input
-    safecrlf = warn
-    excludesfile = ~/.gitignore
+	; autocrlf = input
+	safecrlf = warn
+	excludesfile = ~/.gitignore
 [github]
-    user = rainux
+	user = rainux
 [branch]
-    autosetuprebase = always
+	autosetuprebase = always
 [color]
-    ui      = auto
+	ui		= auto
 [diff]
-    renames = copies
-    tool    = gvimdiff
+	renames = copies
+	tool	= gvimdiff
 [difftool]
-    prompt = false
+	prompt = false
 [user]
-    name = Rainux Luo
-    email = rainux@gmail.com
+	name = Rainux Luo
+	email = rainux@gmail.com
 [merge]
-    summary = true
-    tool    = gvimdiff
+	summary = true
+	tool	= gvimdiff
 [push]
-    default = current
+	default = current
 [rerere]
-    enabled = true
+	enabled = true
 [alias]
-    a       = add
-    aa      = add .
-    au      = add -u
-    amr     = am --resolved
-    b       = branch
-    cb      = checkout -b
-    co      = checkout
-    ci      = commit
-    cia     = commit --amend
-    ch      = cherry -v
-    d       = diff -b
-    dw      = diff -b --word-diff=color
-    dc      = diff -b --cached
-    dcw     = diff -b --cached --word-diff=color
-    ds      = diff -b --stat
-    dt      = difftool
-    dct     = difftool --cached
-    l       = log -p
-    mt      = mergetool -y
-    pr      = pull-request
-    rb      = rebase
-    rbi     = rebase -i
-    rbc     = rebase --continue
-    rba     = rebase --abort
-    rt      = reset
-    rth     = reset --hard
-    s       = status
-    show    = show -b
-    showw   = show -b --word-diff=color
-    sm      = submodule
-    st      = stash
-    stl     = stash list
-    stp     = stash pop
-    sts     = stash show -p
-    stp1    = stash pop stash@{1}
-    stp2    = stash pop stash@{2}
-    stp3    = stash pop stash@{3}
-    stp4    = stash pop stash@{4}
-    stp5    = stash pop stash@{5}
-    sts1    = stash show stash@{1} -p
-    sts2    = stash show stash@{2} -p
-    sts3    = stash show stash@{3} -p
-    sts4    = stash show stash@{4} -p
-    sts5    = stash show stash@{5} -p
-    # summary of what you're going to push
-    ps      = log --pretty=oneline origin..master
-    # like "git log", but include the diffs
-    w       = whatchanged
-    wc      = whatchanged -p
-    edit-unmerged   = "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; gvim `f`"
-    add-unmerged    = "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; git add `f`"
-    today = !git log --since=\"12 hours ago\" --author=\"`git config --get user.name`\" --reverse --pretty=format:%s
-    f       = flow feature
-    frb     = flow feature rebase
-    fco     = flow feature checkout
+	a		= add
+	aa		= add .
+	au		= add -u
+	amr		= am --resolved
+	b		= branch
+	cb		= checkout -b
+	co		= checkout
+	ci		= commit
+	cia		= commit --amend
+	ch		= cherry -v
+	d		= diff -b
+	dw		= diff -b --word-diff=color
+	dc		= diff -b --cached
+	dcw		= diff -b --cached --word-diff=color
+	ds		= diff -b --stat
+	dt		= difftool
+	dct		= difftool --cached
+	l		= log -p
+	mt		= mergetool -y
+	pr		= pull-request
+	rb		= rebase
+	rbi		= rebase -i
+	rbc		= rebase --continue
+	rba		= rebase --abort
+	rt		= reset
+	rth		= reset --hard
+	s		= status
+	show	= show -b
+	showw	= show -b --word-diff=color
+	sm		= submodule
+	st		= stash
+	stl		= stash list
+	stp		= stash pop
+	sts		= stash show -p
+	stp1	= stash pop stash@{1}
+	stp2	= stash pop stash@{2}
+	stp3	= stash pop stash@{3}
+	stp4	= stash pop stash@{4}
+	stp5	= stash pop stash@{5}
+	sts1	= stash show stash@{1} -p
+	sts2	= stash show stash@{2} -p
+	sts3	= stash show stash@{3} -p
+	sts4	= stash show stash@{4} -p
+	sts5	= stash show stash@{5} -p
+	# summary of what you're going to push
+	ps		= log --pretty=oneline origin..master
+	# like "git log", but include the diffs
+	w		= whatchanged
+	wc		= whatchanged -p
+	edit-unmerged	= "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; gvim `f`"
+	add-unmerged	= "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; git add `f`"
+	today = !git log --since=\"12 hours ago\" --author=\"`git config --get user.name`\" --reverse --pretty=format:%s
+	f		= flow feature
+	frb		= flow feature rebase
+	fco		= flow feature checkout
