@@ -42,6 +42,7 @@
 	dt		= difftool
 	dct		= difftool --cached
 	l		= log -p
+	lg		= log --oneline --decorate --graph
 	mt		= mergetool -y
 	pr		= pull-request
 	rb		= rebase
