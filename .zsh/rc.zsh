@@ -91,3 +91,8 @@ source ~/.zsh/theme.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+if [[ $TERM == linux || -n $SSH_TTY ]]; then
+    tmux attach || tmux
+fi
