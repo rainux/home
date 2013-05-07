@@ -139,16 +139,18 @@ $PROMPT_LINE2"
 
 setprompt
 
-function zle-line-init zle-keymap-select {
+function zle-line-init zle-line-finish zle-keymap-select {
     terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
     MODE_INDICATOR="${${KEYMAP/vicmd/"%F{red}-- NORMAL --%f"}/(main|viins)/"%F{green}-- INSERT --%f"}"
     PROMPT="$PROMPT_LINE1
 %{$terminfo_down_sc$MODE_INDICATOR$terminfo[rc]%}$PROMPT_LINE2"
 
     zle reset-prompt
+    zle -R
 }
 
 zle -N zle-line-init
+zle -N zle-line-finish
 zle -N zle-keymap-select
 
 # vim:set ft=zsh:
