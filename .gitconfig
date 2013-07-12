@@ -43,6 +43,7 @@
 	dct		= difftool --cached
 	l		= log -p
 	lg		= log --oneline --decorate --graph
+	lgg		= log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	mt		= mergetool -y
 	pr		= pull-request
 	rb		= rebase
@@ -74,6 +75,7 @@
 	# like "git log", but include the diffs
 	w		= whatchanged
 	wc		= whatchanged -p
+	edit-modified   = "!f() { git ls-files -m | awk '{print $NF}' | sort -u; }; gvim -p `f`"
 	edit-unmerged	= "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; $EDITOR `f`"
 	add-unmerged	= "!f() { git ls-files -u | awk '{print $NF}' | sort -u; }; git add `f`"
 	today = !git log --since=\"12 hours ago\" --author=\"`git config --get user.name`\" --reverse --pretty=format:%s
