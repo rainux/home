@@ -7,7 +7,7 @@ else
     alias o='gnome-open'
     alias open='gnome-open'
 fi
-alias acka='ack -a'
+alias aga='ag -a'
 alias be='bundle exec'
 alias diff='colordiff'
 alias g='git'
