@@ -2,6 +2,7 @@
 	; autocrlf = input
 	safecrlf = warn
 	excludesfile = ~/.gitignore
+	pager = less -r
 [github]
 	user = rainux
 [branch]
@@ -20,17 +21,19 @@
 	summary = true
 	tool	= gvimdiff
 [push]
-	default = current
+	default = simple
 [rerere]
 	enabled = true
 [alias]
 	a		= add
 	aa		= add .
+	ap		= add -p
 	au		= add -u
 	amr		= am --resolved
 	b		= branch
 	cb		= checkout -b
 	co		= checkout
+	cp		= cherry-pick
 	ci		= commit
 	cia		= commit --amend
 	ch		= cherry -v
@@ -82,3 +85,17 @@
 	f		= flow feature
 	frb		= flow feature rebase
 	fco		= flow feature checkout
+	cloner  = clone --recursive
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+[credential]
+	helper = osxkeychain
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
