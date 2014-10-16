@@ -80,13 +80,6 @@ if [[ $OSTYPE == darwin* ]]; then
     export target='5.0'
 fi
 
-export RUBY_HEAP_MIN_SLOTS=1000000
-export RUBY_HEAP_SLOTS_INCREMENT=1000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_HEAP_FREE_MIN=500000
-export RUBY_GC_MALLOC_LIMIT=60000000
-export RUBY_FREE_MIN=200000
-
 if [[ $TERM == xterm ]]
 then
     export TERM='xterm-256color'
