@@ -1,2 +1,5 @@
 . ~/.zsh/rc.zsh
-eval "$(direnv hook $0)"
+
+if [[ -x `which direnv` ]]; then
+    eval "$(direnv hook $0)"
+fi
