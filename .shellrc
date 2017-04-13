@@ -1,5 +1,6 @@
+alias reload_shellrc='source ~/.shellrc'
+
 if [[ $OSTYPE == darwin* ]]; then
-    alias gvim='open -a MacVim'
     alias ls='ls -GFh'
     alias o='open'
 else
@@ -9,14 +10,17 @@ else
 fi
 alias aga='ag -a'
 alias be='bundle exec'
+alias dc='docker-compose'
+alias dm='docker-machine'
+alias de='deploy exec $DOCKER_MACHINE_NAME'
 alias diff='colordiff'
 alias g='git'
 alias gf='git-flow'
 alias gvi='gvim --noplugin'
 alias grep='grep --color'
+alias irb='pry'
 alias less='less -r'
 alias make='colormake'
-alias qgit='qgit --all &'
 alias rgc='rvm gemset create'
 alias rgl='rvm gemset list'
 alias rgu='rvm gemset use'
@@ -62,19 +66,25 @@ alias yaoinsd='yaourt -S --nodeps'
 alias yaomir='yaourt -Syy'
 alias yaoget='yaourt -G'
 
+alias tmr='tmutil restore ~/TM'
+
 export ANDROID_HOME="$HOME/android-sdk"
 export GOPATH="$HOME/go"
-export PATH="$HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:/usr/share/java/apache-ant/bin:/usr/lib/colorgcc/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$GOPATH/bin"
+export PATH="$HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin"
+export PATH=".git/safe/../../bin:.git/safe/../../node_modules/.bin:$PATH"
+
 # Set CDPATH may cause make not works, disable it before make.
 export CDPATH='.:~/devel'
+if [[ $OSTYPE == darwin* ]]; then
+    export LANG='en_US.UTF-8'
+else
+    export LC_CTYPE='zh_CN.UTF-8'
+fi
 export EDITOR='vim'
 export RBXOPT="-Xrbc.db=$HOME/.rbx"
-export JRUBY_OPTS='--ng'
-if [[ $OSTYPE == darwin* ]]; then
-    # RubyMotion compiling jobs
-    export jobs=8
-    # RubyMotion deployment target
-    export target='5.0'
+
+if [[ -x `which hub` ]]; then
+    alias git=hub
 fi
 
 if [[ $TERM == xterm ]]
@@ -87,18 +97,36 @@ then
     export LANG='C'
 fi
 
-http_proxy() {
+proxy() {
     if [[ $1 == on ]]
     then
         echo http_proxy turned on
-        export http_proxy=http://localhost:8123
+        export https_proxy=http://127.0.0.1:6152
+        export http_proxy=http://127.0.0.1:6152
     elif [[ $1 == off ]]
     then
         echo http_proxy turned off
         unset http_proxy
+        unset https_proxy
     else
         echo 'Usage: http_proxy [on|off]'
     fi
 }
+
+dma() {
+    if [[ $1 == '' ]]
+    then
+        docker-machine active
+    else
+        eval "$(docker-machine env $2 $1)"
+        export DEPLOY_ENV="$DOCKER_MACHINE_NAME"
+    fi
+}
+
+dmas() {
+    dma $1 --swarm
+}
+
+[ -f ~/.private_rc ] && . ~/.private_rc
 
 # vim: set ft=sh:

@@ -1,8 +1,7 @@
 [core]
-	; autocrlf = input
+	; eol = lf
+	autocrlf = input
 	safecrlf = warn
-	excludesfile = ~/.gitignore
-	pager = less -r
 [github]
 	user = rainux
 [branch]
@@ -12,6 +11,7 @@
 [diff]
 	renames = copies
 	tool	= gvimdiff
+	compactionHeuristic = true
 [difftool]
 	prompt = false
 [user]
@@ -28,14 +28,16 @@
 	a		= add
 	aa		= add .
 	ap		= add -p
+	arc		= !git archive --format=zip --prefix="$(basename $PWD)/" HEAD -o "$(basename $PWD)-`git rev-parse --short HEAD`.zip"
 	au		= add -u
 	amr		= am --resolved
 	b		= branch
 	cb		= checkout -b
 	co		= checkout
 	cp		= cherry-pick
-	ci		= commit
-	cia		= commit --amend
+	ci		= commit --gpg-sign
+	cia		= commit --gpg-sign --amend
+	cim		= commit --gpg-sign -m
 	ch		= cherry -v
 	d		= diff -b
 	dw		= diff -b --word-diff=color
@@ -46,7 +48,8 @@
 	dct		= difftool --cached
 	l		= log -p
 	lg		= log --oneline --decorate --graph
-	lgg		= log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgg		= log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	log		= log --show-signature
 	mt		= mergetool -y
 	pr		= pull-request
 	rb		= rebase
@@ -73,6 +76,7 @@
 	sts3	= stash show stash@{3} -p
 	sts4	= stash show stash@{4} -p
 	sts5	= stash show stash@{5} -p
+	tagme	= !git tag "v$(git show --no-patch --date=format:%Y%m%d --pretty=format:'%cd-%h' HEAD)"
 	# summary of what you're going to push
 	ps		= log --pretty=oneline origin..master
 	# like "git log", but include the diffs
@@ -97,5 +101,18 @@
 [credential]
 	helper = osxkeychain
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[tar "tar.xz"]
+	command = xz -c

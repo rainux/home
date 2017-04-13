@@ -1,6 +1,7 @@
 window = hs.window
 mouse = hs.mouse
 moon = require 'moon'
+logger = hs.logger.new('main', 'verbose')
 
 window.animationDuration = 0
 
@@ -37,6 +38,7 @@ bind 'alt ctrl K', 'Move mouse pointer to North screen', ->
         y: point.y * (northScreen\fullFrame().h / currentScreen\fullFrame().h)
     }
     mouse.setRelativePosition(point, northScreen)
+    hs.eventtap.leftClick(mouse.getAbsolutePosition())
 
 bind 'alt ctrl J', 'Move mouse pointer to South screen', ->
     currentScreen = mouse.getCurrentScreen()
@@ -49,6 +51,7 @@ bind 'alt ctrl J', 'Move mouse pointer to South screen', ->
         y: point.y * (southScreen\fullFrame().h / currentScreen\fullFrame().h)
     }
     mouse.setRelativePosition(point, southScreen)
+    hs.eventtap.leftClick(mouse.getAbsolutePosition())
 
 bind 'shift ctrl cmd L', 'Rotate DELL P2715Q screen 0', ->
     hs.screen('DELL P2715Q')\rotate(0)
@@ -69,12 +72,15 @@ appWatcher = hs.application.watcher.new((appName, eventType, application) ->
 )\start()
 
 screenWatcher = hs.screen.watcher.new(->
+    logger.d 'screen layout changed'
     if hs.screen('DELL P2715Q')
-        hs.application.launchOrFocus('Soundflowerbed')
+        logger.d 'DELL P2715Q connected'
+        hs.application.launchOrFocus('SoundflowerBed')
         hs.audiodevice.findOutputByName('Soundflower (2ch)')\setDefaultOutputDevice()
     else
+        logger.d 'DELL P2715Q disconnected'
         hs.audiodevice.findOutputByName('Built-in Output')\setDefaultOutputDevice()
-        app = hs.application.get('Soundflowerbed')
+        app = hs.application.get('SoundflowerBed')
         app\kill9() if app
 )\start()
 
@@ -89,16 +95,20 @@ appBindings = {
     { 'alt R', 'Evernote' }
     { 'alt A', 'Calendar' }
     { 'alt S', 'Safari' }
+    { 'alt T', 'Safari Technology Preview' }
+    { 'alt Y', 'Typora' }
+    { 'alt U', 'Ulysses' }
     { 'alt D', 'Day One' }
     { 'alt F', 'Finder' }
     { 'alt C', 'Google Chrome' }
     { 'alt G', 'Telegram' }
     { 'alt H', 'Dash' }
+    { 'alt J', 'IntelliJ IDEA CE' }
     { 'alt K', 'Skype' }
-    { 'alt L', 'Slack' }
+    { 'alt L', 'Microsoft Outlook' }
+    { 'alt I', 'Dictionary' }
     { 'alt O', 'OmniFocus' }
     { 'alt P', 'Mailplane 3' }
-    { 'alt B', 'Foxmail' }
     { 'alt N', 'Simplenote' }
     { 'alt M', 'Messages' }
 }

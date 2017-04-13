@@ -1,6 +1,6 @@
 begin
   require 'awesome_print'
-  Pry.config.print = proc { |output, value| output.puts value.ai }
+  AwesomePrint.pry!
 rescue LoadError
   puts 'awesome_print not available :('
 end
@@ -16,6 +16,10 @@ rescue LoadError
   puts 'hirb not available :('
 end
 
+begin
+  require 'interactive_editor'
+rescue LoadError
+end
 
 Pry.config.hooks.add_hook(:before_session, :greetings) do
 
@@ -38,11 +42,19 @@ Pry.config.hooks.add_hook(:before_session, :greetings) do
   end
 end
 
-Pry.commands.alias_command 'c', 'continue'
-Pry.commands.alias_command 's', 'step'
-Pry.commands.alias_command 'n', 'next'
-Pry.commands.alias_command 'u', 'up'
-Pry.commands.alias_command 'd', 'down'
-Pry.commands.alias_command 'em', 'edit-method'
+if Pry.commands['continue']
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+end
+
+if Pry.commands['up']
+  Pry.commands.alias_command 'u', 'up'
+  Pry.commands.alias_command 'd', 'down'
+end
+
+if Pry.commands['show-stack']
+  Pry.commands.alias_command 'ss', 'show-stack'
+end
 
 # vim: set ft=ruby:

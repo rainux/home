@@ -1,12 +1,35 @@
-# 关于历史纪录的配置
+# location of history
+export HISTFILE=~/.zsh/history
 # number of lines kept in history
 HISTSIZE=100000
 # number of lines saved in the history after logout
 SAVEHIST=100000
-# location of history
-export HISTFILE=~/.zsh/history
-# append command to history file once executed
-setopt INC_APPEND_HISTORY
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+
+# TODO bindkeys for them in vi mode
+# bindkey "${key[Up]}" up-line-or-local-history
+# bindkey "${key[Down]}" down-line-or-local-history
+
+up-line-or-local-history() {
+    zle set-local-history 1
+    zle up-line-or-history
+    zle set-local-history 0
+}
+zle -N up-line-or-local-history
+down-line-or-local-history() {
+    zle set-local-history 1
+    zle down-line-or-history
+    zle set-local-history 0
+}
+zle -N down-line-or-local-history
 
 setopt auto_pushd
 
@@ -24,6 +47,13 @@ setopt MENU_COMPLETE
 
 autoload -U compinit
 compinit
+
+# Complete in history with M-/, M-,
+zstyle ':completion:history-words:*' list yes
+zstyle ':completion:history-words:*' menu yes
+zstyle ':completion:history-words:*' remove-all-dups yes
+bindkey "\e/" _history-complete-older
+bindkey "\e," _history-complete-newer
 
 # Completion caching
 zstyle ':completion::complete:*' use-cache on
@@ -71,11 +101,14 @@ zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
 zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
 
-# Import .my_bashrc
-[ -f ~/.my_bashrc ] && . ~/.my_bashrc
+# Import .shellrc
+[ -f ~/.shellrc ] && . ~/.shellrc
 
 # 路径别名 进入相应的路径时只要 cd ~xxx
 hash -d VHOST="/var/www/vhosts"
+hash -d AS="$HOME/Library/Application Support"
+hash -d Preferences="$HOME/Library/Preferences"
+hash -d Containers="$HOME/Library/Containers"
 
 # For Emacs在Emacs终端中使用Zsh的一些设置 不推荐在Emacs中使用它
 if [[ "$TERM" == "dumb" ]]; then
@@ -87,12 +120,14 @@ fi
 
 source ~/.zsh/theme.zsh
 
-
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source ~/.zsh/z/z.sh
+export _Z_DATA=~/.zsh/cache/z
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 if [[ $TERM == linux || ( -n $SSH_TTY && -z $TMUX ) ]]; then
-    tmux attach || tmux
+    tmux new -As rainux
 fi

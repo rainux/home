@@ -1,18 +1,18 @@
 autoload colors; colors
 
-ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" git:(%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}) %{$fg[yellow]%}✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%})"
 
 source ~/.zsh/git.zsh
+source ~/.zsh/docker-machine.zsh
 
 # 效果超炫的提示符，如需要禁用，注释下面配置
 function precmd {
 
     local TERMWIDTH
     (( TERMWIDTH = ${COLUMNS} - 1 ))
-
 
     ###
     # Truncate the path if it's too long.
@@ -131,7 +131,7 @@ function setprompt {
     ###
     # Finally, the prompt.
 
-    PROMPT_LINE1="$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}%{$fg[cyan]%}%n%{$fg[magenta]%}@%{$fg[blue]%}%M %{$fg[green]%}%~ %{$reset_color%}\$(git_prompt_info)"
+    PROMPT_LINE1="$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}%{$fg[cyan]%}%n%{$fg[magenta]%}@%{$fg[blue]%}%M %{$fg[green]%}%~%{$reset_color%}\$(git_prompt_info)\$(docker_machine_prompt_info)"
     PROMPT_LINE2="%{$fg[red]%}%#%{$reset_color%} YUKI.N> "
     PROMPT="$PROMPT_LINE1
 $PROMPT_LINE2"
