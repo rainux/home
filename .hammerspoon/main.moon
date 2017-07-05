@@ -60,18 +60,16 @@ bind 'shift ctrl cmd P', 'Rotate DELL P2715Q screen 90', ->
     hs.screen('DELL P2715Q')\rotate(90)
 
 
-appWatcher = hs.application.watcher.new((appName, eventType, application) ->
+-- A watcher must be exported to avoid Lua GC
+export appWatcher = hs.application.watcher.new((appName, eventType, application) ->
     if (eventType == hs.application.watcher.activated)
         switch appName
             when 'Finder'
                 -- Bring all Finder windows forward when one gets activated
                 application\selectMenuItem({'Window', 'Bring All to Front'})
-                hs.fnutils.each application\allWindows(), (window) ->
-                    window\moveToScreen(hs.screen.mainScreen())
-                application\allWindows()[1]\focus()
 )\start()
 
-screenWatcher = hs.screen.watcher.new(->
+export screenWatcher = hs.screen.watcher.new(->
     logger.d 'screen layout changed'
     if hs.screen('DELL P2715Q')
         logger.d 'DELL P2715Q connected'
@@ -101,6 +99,7 @@ appBindings = {
     { 'alt D', 'Day One' }
     { 'alt F', 'Finder' }
     { 'alt C', 'Google Chrome' }
+    { 'alt B', 'MWeb' }
     { 'alt G', 'Telegram' }
     { 'alt H', 'Dash' }
     { 'alt J', 'IntelliJ IDEA CE' }
