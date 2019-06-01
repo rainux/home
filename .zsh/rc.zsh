@@ -128,6 +128,10 @@ export _Z_DATA=~/.zsh/cache/z
 export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-if [[ $TERM == linux || ( -n $SSH_TTY && -z $TMUX ) ]]; then
+if [[ $TERM == linux ]]; then
+    fbterm -- tmux new -As rainux
+fi
+
+if [[ -n $SSH_TTY && -z $TMUX ]]; then
     tmux new -As rainux
 fi
